@@ -1,6 +1,13 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
+/*
+ * File: Reservation.cs
+ * Author: Abeywickrama C.P.
+ * Date: October 4, 2023
+ * Description: This file contains the definition of the Reservation model, which provides various utility functions.
+ */
+
 namespace EAD_TravelManagement.Models
 {
     public class Reservation
@@ -15,6 +22,7 @@ namespace EAD_TravelManagement.Models
         public string ScheduleId { get; set; } = null!;
         public int SeatCount { get; set; } = 0;
         public string ReservationType { get; set; } = null!;
+        public bool ReservationStatus { get; set;} = true;
 
     }
 }
