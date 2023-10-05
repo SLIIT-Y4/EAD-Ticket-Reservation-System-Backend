@@ -7,5 +7,8 @@
         public string DatabaseName { get; set; } = null!;
 
         public string UsersCollectionName { get; set; } = null!;
+
+        public string ReservationsCollectionName { get; set; } = null!;
+
     }
 }
