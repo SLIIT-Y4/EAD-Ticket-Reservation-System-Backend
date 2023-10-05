@@ -8,6 +8,8 @@ builder.Services.Configure<TicketReservationDatabaseSettings>(
 builder.Configuration.GetSection("TicketReservationDatabase"));
 
 builder.Services.AddSingleton<UsersService>();
+builder.Services.AddSingleton<TrainsService>();
+builder.Services.AddSingleton<SchedulesService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
