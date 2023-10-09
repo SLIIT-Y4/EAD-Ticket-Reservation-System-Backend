@@ -110,7 +110,7 @@ namespace EAD_TravelManagement.Controllers
             return NoContent();
         }
 
-
+        //cancel a reservation
         [HttpPut("cancelReservation/{id:length(24)}")]
         public async Task<IActionResult> CancelReservation(string id)
         {
