@@ -15,6 +15,10 @@ namespace EAD_TravelManagement.Models
 
         public string UsersCollectionName { get; set; } = null!;
 
+        public string TrainsCollectionName { get; set; } = null!;
+        public string SchedulesCollectionName { get; set; } = null!;
+
+
         public string ReservationsCollectionName { get; set; } = null!;
 
     }
