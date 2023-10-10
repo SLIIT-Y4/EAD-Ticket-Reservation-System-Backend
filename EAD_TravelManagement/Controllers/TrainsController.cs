@@ -18,7 +18,7 @@ namespace EAD_TravelManagement.Controllers
         public async Task<List<Train>> Get() =>
             await _trainsService.GetAsync();
 
-        [HttpGet("{id:length(24)}")]
+        [HttpGet("{id:length(4)}")]
         public async Task<ActionResult<Train>> Get(string id)
         {
             var train = await _trainsService.GetAsync(id);
@@ -39,7 +39,7 @@ namespace EAD_TravelManagement.Controllers
             return CreatedAtAction(nameof(Get), new { id = newTrain.TrainId }, newTrain);
         }
 
-        [HttpPut("{id:length(24)}")]
+        [HttpPut("{id:length(4)}")]
         public async Task<IActionResult> Update(string id, Train updatedTrain)
         {
             var train = await _trainsService.GetAsync(id);
@@ -56,7 +56,7 @@ namespace EAD_TravelManagement.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id:length(24)}")]
+        [HttpDelete("{id:length(4)}")]
         public async Task<IActionResult> Delete(string id)
         {
             var train = await _trainsService.GetAsync(id);
