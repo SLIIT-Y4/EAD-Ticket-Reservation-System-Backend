@@ -35,6 +35,22 @@ namespace EAD_TravelManagement.Services
 
         public async Task RemoveAsync(string id) =>
             await _schedulesCollection.DeleteOneAsync(x => x.ScheduleId == id);
+
+        //find scheduled trains based on startPoint,stopStation,date
+        public async Task<List<Schedule>> GetScheduledTrainsAsync(string startPoint, string stopStation, DateTime day)
+        {
+            // query to get schedules with trains
+            var filter = Builders<Schedule>.Filter.Eq(x => x.StartPoint, startPoint) &
+                         Builders<Schedule>.Filter.ElemMatch(x => x.StopStations, s => s == stopStation) &
+                         Builders<Schedule>.Filter.Eq(x => x.Day, day) &
+                         Builders<Schedule>.Filter.Eq(x => x.ActiveStatus, true);
+
+            // Use the filter to find matching schedules with trains
+            var matchingSchedules = await _schedulesCollection.Find(filter).ToListAsync();
+
+            return matchingSchedules;
+        }
+
     }
 }
 

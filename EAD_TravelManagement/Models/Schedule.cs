@@ -30,5 +30,7 @@ namespace EAD_TravelManagement.Models
 
         [Required]
         public string[] StopStations { get; set; } = null!;
+        public bool ActiveStatus { get; set; } = true;
+        public string? TrainName { get; set; }
     }
 }
