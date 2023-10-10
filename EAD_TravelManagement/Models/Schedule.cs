@@ -15,5 +15,7 @@ namespace EAD_TravelManagement.Models
         public string DepTime { get; set; } = null!;
         public string ArrivalTime { get; set; } = null!;
         public string[] StopStations { get; set; } = null!;
+        public bool ActiveStatus { get; set; } = true;
+        public string? TrainName { get; set; }
     }
 }

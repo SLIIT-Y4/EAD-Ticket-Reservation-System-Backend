@@ -13,5 +13,8 @@ namespace EAD_TravelManagement.Models
         public string Destination { get; set; } = null!;
         public string Type { get; set; } = null!;
         public string RouteCategory { get; set; } = null!;
+        public bool ActiveStatus { get; set; } = true;
+        public bool PublishStatus { get; set; } = true;
+
     }
 }

@@ -10,9 +10,13 @@ namespace EAD_TravelManagement.Controllers
     public class SchedulesController : ControllerBase
     {
         private readonly SchedulesService _schedulesService;
+        private readonly TrainsService _trainsService;
 
-        public SchedulesController(SchedulesService schedulesService) =>
+        public SchedulesController(SchedulesService schedulesService, TrainsService trainsService)
+        {
             _schedulesService = schedulesService;
+            _trainsService = trainsService; // Initialize TrainsService
+        }
 
         [HttpGet]
         public async Task<List<Schedule>> Get() =>
@@ -69,6 +73,22 @@ namespace EAD_TravelManagement.Controllers
             await _schedulesService.RemoveAsync(id);
 
             return NoContent();
+        }
+
+        //find scheduled trains based on startPoint,stopStation,date
+        [HttpGet("ScheduledTrains")]
+        public async Task<IActionResult> GetScheduledTrains(string startPoint, string stopStation, DateTime day)
+        {
+            var scheduledTrains = await _schedulesService.GetScheduledTrainsAsync(startPoint, stopStation, day);
+
+            if (scheduledTrains != null && scheduledTrains.Any())
+            {
+               return Ok(scheduledTrains);
+            }
+            else
+            {
+                return NotFound("No scheduled trains found for the specified criteria.");
+            }
         }
     }
 }
