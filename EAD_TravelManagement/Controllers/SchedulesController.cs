@@ -11,11 +11,13 @@ namespace EAD_TravelManagement.Controllers
     {
         private readonly SchedulesService _schedulesService;
         private readonly TrainsService _trainsService;
+        private readonly ReservationService _reservationService;
 
-        public SchedulesController(SchedulesService schedulesService, TrainsService trainsService)
+        public SchedulesController(SchedulesService schedulesService, TrainsService trainsService, ReservationService reservationService)
         {
-            _schedulesService = schedulesService;
+            _schedulesService = schedulesService; // Initialize SchedulesService
             _trainsService = trainsService; // Initialize TrainsService
+            _reservationService = reservationService; // Initialize ReservationService
         }
 
         [HttpGet]
@@ -89,6 +91,35 @@ namespace EAD_TravelManagement.Controllers
             {
                 return NotFound("No scheduled trains found for the specified criteria.");
             }
+        }
+
+        //cancel a schedule
+        [HttpPut("cancelSchedule/{id:length(24)}")]
+        public async Task<IActionResult> cancelSchedule(string id)
+        {
+            // Check if there are any reservations to the schedule
+            var reservations = await _reservationService.GetReservationsByScheduleId(id);
+            
+            if (reservations != null && reservations.Any())
+            {
+                return BadRequest("Cannot cancel a schedule with existing reservations.");
+            }
+
+            // If there are no reservations, proceed with the cancellation logic
+            var schedule = await _schedulesService.GetAsync(id);
+
+            if (schedule is null)
+            {
+                 return NotFound();
+            }
+
+            // setting ActiveStatus as false to cancel
+            schedule.ActiveStatus = false;
+
+            // Update the schedule to mark it as canceled
+            await _schedulesService.UpdateAsync(id, schedule);
+
+            return Ok("Schedule canceled successfully.");
         }
     }
 }
