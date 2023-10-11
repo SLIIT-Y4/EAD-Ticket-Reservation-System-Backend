@@ -21,10 +21,12 @@ namespace EAD_TravelManagement.Controllers
         public UsersController(UsersService usersService) =>
             _usersService = usersService;
 
+        //Get all users
         [HttpGet]
         public async Task<List<User>> Get() =>
             await _usersService.GetAsync();
 
+        //Get a specific user
         [HttpGet("{nic}")]
         public async Task<ActionResult<User>> Get(string nic)
         {
@@ -38,6 +40,7 @@ namespace EAD_TravelManagement.Controllers
             return user;
         }
 
+        //Add a new user
         [HttpPost]
         public async Task<IActionResult> Post(User newUser)
         {
@@ -46,7 +49,7 @@ namespace EAD_TravelManagement.Controllers
             return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
         }
 
-
+        //Update a specific user
         [HttpPut("{nic}")]
         public async Task<IActionResult> Update(string nic, User updatedUser)
         {
@@ -64,6 +67,7 @@ namespace EAD_TravelManagement.Controllers
             return NoContent();
         }
 
+        //Delete a specific user
         [HttpDelete("{nic}")]
         public async Task<IActionResult> Delete(string nic)
         {

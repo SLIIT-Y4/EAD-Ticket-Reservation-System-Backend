@@ -25,10 +25,12 @@ namespace EAD_TravelManagement.Controllers
             _trainsService = trainsService; // Initialize TrainsService
         }
 
+        //Get all schedules
         [HttpGet]
         public async Task<List<Schedule>> Get() =>
             await _schedulesService.GetAsync();
 
+        //Get a specific schedule
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Schedule>> Get(string id)
         {
@@ -42,6 +44,7 @@ namespace EAD_TravelManagement.Controllers
             return schedule;
         }
 
+        //Create a schedule
         [HttpPost]
         public async Task<IActionResult> Post(Schedule newSchedule)
         {
@@ -50,6 +53,7 @@ namespace EAD_TravelManagement.Controllers
             return CreatedAtAction(nameof(Get), new { id = newSchedule.ScheduleId }, newSchedule);
         }
 
+        //Update a specific schedule
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, Schedule updatedSchedule)
         {
@@ -67,6 +71,7 @@ namespace EAD_TravelManagement.Controllers
             return NoContent();
         }
 
+        //Delete a specific schedule
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {

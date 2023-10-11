@@ -29,18 +29,23 @@ namespace EAD_TravelManagement.Services
                 ticketReservationDatabaseSettings.Value.UsersCollectionName);
         }
 
+        //Get all users
         public async Task<List<User>> GetAsync() => 
             await _usersCollection.Find(_ => true).ToListAsync();
 
+        //Get a specific user
         public async Task<User?> GetAsync(string nic) =>
             await _usersCollection.Find(x => x.NIC == nic).FirstOrDefaultAsync();
 
+        //Add a new user
         public async Task CreateAsync(User newUser) =>
             await _usersCollection.InsertOneAsync(newUser);
 
+        //Update a specific user
         public async Task UpdateAsync(string nic, User updatedUser) =>
             await _usersCollection.ReplaceOneAsync(x => x.NIC == nic, updatedUser);
 
+        //Delete a specific user
         public async Task RemoveAsync(string nic) =>
             await _usersCollection.DeleteOneAsync(x => x.NIC == nic);
     }

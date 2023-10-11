@@ -29,10 +29,13 @@ namespace EAD_TravelManagement.Services
                 ticketReservationDatabaseSettings.Value.LoginsCollectionName);
         }
 
+        //Register a user
         public async Task RegisterUserAsync(Login login)
         {
             await _loginsCollection.InsertOneAsync(login);
         }
+
+        //Login function
         public async Task<Login> AuthenticateAsync(string nic, string password)
         {
             var login = await _loginsCollection.Find(l => l.NIC == nic && l.Password == password).FirstOrDefaultAsync();

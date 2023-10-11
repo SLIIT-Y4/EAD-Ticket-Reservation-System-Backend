@@ -26,16 +26,16 @@ namespace EAD_TravelManagement.Controllers
             _usersService = usersService;
         }
 
+        //SignUp Function
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp(Login login)
         {
-            // You might want to add validation logic here
 
             await _loginsService.RegisterUserAsync(login);
             return Ok("User registered successfully");
         }
 
-
+        //Login Function
         [HttpPost("login")]
         public async Task<IActionResult> Login(Login login)
         {

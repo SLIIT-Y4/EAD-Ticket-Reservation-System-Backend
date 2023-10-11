@@ -21,10 +21,12 @@ namespace EAD_TravelManagement.Controllers
         public TrainsController(TrainsService trainsService) =>
             _trainsService = trainsService;
 
+        //Get all trains
         [HttpGet]
         public async Task<List<Train>> Get() =>
             await _trainsService.GetAsync();
 
+        //Get a particular train
         [HttpGet("{id:length(4)}")]
         public async Task<ActionResult<Train>> Get(string id)
         {
@@ -38,6 +40,7 @@ namespace EAD_TravelManagement.Controllers
             return train;
         }
 
+        //Add a new train
         [HttpPost]
         public async Task<IActionResult> Post(Train newTrain)
         {
@@ -46,6 +49,7 @@ namespace EAD_TravelManagement.Controllers
             return CreatedAtAction(nameof(Get), new { id = newTrain.TrainId }, newTrain);
         }
 
+        //Update a particular train
         [HttpPut("{id:length(4)}")]
         public async Task<IActionResult> Update(string id, Train updatedTrain)
         {
@@ -63,6 +67,7 @@ namespace EAD_TravelManagement.Controllers
             return NoContent();
         }
 
+        //Delete a particular train
         [HttpDelete("{id:length(4)}")]
         public async Task<IActionResult> Delete(string id)
         {

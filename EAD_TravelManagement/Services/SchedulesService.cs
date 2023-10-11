@@ -29,18 +29,23 @@ namespace EAD_TravelManagement.Services
                 ticketReservationDatabaseSettings.Value.SchedulesCollectionName);
         }
 
+        //Get all schedules
         public async Task<List<Schedule>> GetAsync() =>
             await _schedulesCollection.Find(_ => true).ToListAsync();
 
+        //Get a particular schedule
         public async Task<Schedule?> GetAsync(string id) =>
             await _schedulesCollection.Find(x => x.ScheduleId == id).FirstOrDefaultAsync();
 
+        //Create a schedule
         public async Task CreateAsync(Schedule newSchedule) =>
             await _schedulesCollection.InsertOneAsync(newSchedule);
 
+        //Update a particular schedule
         public async Task UpdateAsync(string id, Schedule updatedSchedule) =>
             await _schedulesCollection.ReplaceOneAsync(x => x.ScheduleId == id, updatedSchedule);
 
+        //Remove a particular schedule
         public async Task RemoveAsync(string id) =>
             await _schedulesCollection.DeleteOneAsync(x => x.ScheduleId == id);
 
