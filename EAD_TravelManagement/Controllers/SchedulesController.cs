@@ -1,4 +1,11 @@
-﻿using EAD_TravelManagement.Models;
+﻿/*
+ * File: SchedulesController.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the SchedulesController class, which provides various utility functions.
+ */
+
+using EAD_TravelManagement.Models;
 using EAD_TravelManagement.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +27,12 @@ namespace EAD_TravelManagement.Controllers
             _reservationService = reservationService; // Initialize ReservationService
         }
 
+        //Get all schedules
         [HttpGet]
         public async Task<List<Schedule>> Get() =>
             await _schedulesService.GetAsync();
 
+        //Get a specific schedule
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Schedule>> Get(string id)
         {
@@ -37,6 +46,7 @@ namespace EAD_TravelManagement.Controllers
             return schedule;
         }
 
+        //Create a schedule
         [HttpPost]
         public async Task<IActionResult> Post(Schedule newSchedule)
         {
@@ -45,6 +55,7 @@ namespace EAD_TravelManagement.Controllers
             return CreatedAtAction(nameof(Get), new { id = newSchedule.ScheduleId }, newSchedule);
         }
 
+        //Update a specific schedule
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, Schedule updatedSchedule)
         {
@@ -62,6 +73,7 @@ namespace EAD_TravelManagement.Controllers
             return NoContent();
         }
 
+        //Delete a specific schedule
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {

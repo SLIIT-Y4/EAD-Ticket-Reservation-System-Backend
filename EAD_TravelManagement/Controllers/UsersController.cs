@@ -1,4 +1,11 @@
-﻿using EAD_TravelManagement.Models;
+﻿/*
+ * File: UsersController.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the UsersController class, which provides various utility functions.
+ */
+
+using EAD_TravelManagement.Models;
 using EAD_TravelManagement.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +21,16 @@ namespace EAD_TravelManagement.Controllers
         public UsersController(UsersService usersService) =>
             _usersService = usersService;
 
+        //Get all users
         [HttpGet]
         public async Task<List<User>> Get() =>
             await _usersService.GetAsync();
 
-        [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<User>> Get(string id)
+        //Get a specific user
+        [HttpGet("{nic}")]
+        public async Task<ActionResult<User>> Get(string nic)
         {
-            var user = await _usersService.GetAsync(id);
+            var user = await _usersService.GetAsync(nic);
 
             if (user is null)
             {
@@ -31,6 +40,7 @@ namespace EAD_TravelManagement.Controllers
             return user;
         }
 
+        //Add a new user
         [HttpPost]
         public async Task<IActionResult> Post(User newUser)
         {
@@ -39,34 +49,36 @@ namespace EAD_TravelManagement.Controllers
             return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
         }
 
-        [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> Update(string id, User updatedUser)
+        //Update a specific user
+        [HttpPut("{nic}")]
+        public async Task<IActionResult> Update(string nic, User updatedUser)
         {
-            var user = await _usersService.GetAsync(id);
+            var user = await _usersService.GetAsync(nic);
 
             if (user is null)
             {
                 return NotFound();
             }
 
-            updatedUser.Id = user.Id;
+            updatedUser.NIC = user.NIC;
 
-            await _usersService.UpdateAsync(id, updatedUser);
+            await _usersService.UpdateAsync(nic, updatedUser);
 
             return NoContent();
         }
 
-        [HttpDelete("{id:length(24)}")]
-        public async Task<IActionResult> Delete(string id)
+        //Delete a specific user
+        [HttpDelete("{nic}")]
+        public async Task<IActionResult> Delete(string nic)
         {
-            var user = await _usersService.GetAsync(id);
+            var user = await _usersService.GetAsync(nic);
 
             if (user is null)
             {
                 return NotFound();
             }
 
-            await _usersService.RemoveAsync(id);
+            await _usersService.RemoveAsync(nic);
 
             return NoContent();
         }

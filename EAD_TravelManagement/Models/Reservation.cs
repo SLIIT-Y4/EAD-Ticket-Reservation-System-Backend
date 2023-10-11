@@ -23,6 +23,8 @@ namespace EAD_TravelManagement.Models
         public int SeatCount { get; set; } = 0;
         public string ReservationType { get; set; } = null!;
         public bool ReservationStatus { get; set;} = true;
+        public string UserNIC { get; set; } = null!;
+
 
     }
 }

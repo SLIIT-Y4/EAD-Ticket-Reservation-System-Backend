@@ -1,4 +1,12 @@
-﻿using EAD_TravelManagement.Models;
+﻿/*
+ * File: SchedulesService.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the Schedule Service, which provides various utility functions.
+ */
+
+
+using EAD_TravelManagement.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -22,18 +30,23 @@ namespace EAD_TravelManagement.Services
                 ticketReservationDatabaseSettings.Value.SchedulesCollectionName);
         }
 
+        //Get all schedules
         public async Task<List<Schedule>> GetAsync() =>
             await _schedulesCollection.Find(_ => true).ToListAsync();
 
+        //Get a particular schedule
         public async Task<Schedule?> GetAsync(string id) =>
             await _schedulesCollection.Find(x => x.ScheduleId == id).FirstOrDefaultAsync();
 
+        //Create a schedule
         public async Task CreateAsync(Schedule newSchedule) =>
             await _schedulesCollection.InsertOneAsync(newSchedule);
 
+        //Update a particular schedule
         public async Task UpdateAsync(string id, Schedule updatedSchedule) =>
             await _schedulesCollection.ReplaceOneAsync(x => x.ScheduleId == id, updatedSchedule);
 
+        //Remove a particular schedule
         public async Task RemoveAsync(string id) =>
             await _schedulesCollection.DeleteOneAsync(x => x.ScheduleId == id);
 
