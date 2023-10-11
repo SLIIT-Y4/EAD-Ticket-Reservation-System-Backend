@@ -1,4 +1,12 @@
-﻿using EAD_TravelManagement.Models;
+﻿/*
+ * File: TrainsService.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the Train Service, which provides various utility functions.
+ */
+
+
+using EAD_TravelManagement.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

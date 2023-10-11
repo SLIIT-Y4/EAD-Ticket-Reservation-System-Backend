@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/*
+ * File: Users.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the User model, which provides various utility functions.
+ */
+
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 
@@ -20,16 +28,16 @@ namespace EAD_TravelManagement.Models
         public string Email { get; set; } = null!;
 
         [Required]
-        public string ContactNo { get; set; } = null!;
+        public string UserRole { get; set; } = null!;
 
         [Required, DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
-        [Required, DataType(DataType.Password)]
+        [Required, DataType(DataType.Password), Compare("Password", ErrorMessage = "The password and confirm password do not match.")]
         public string ConfirmPassword { get; set; } = null!;
 
         [Required]
-        public string AccountStatus { get; set; } = null!;
+        public string? AccountStatus { get; set; }
 
 
 

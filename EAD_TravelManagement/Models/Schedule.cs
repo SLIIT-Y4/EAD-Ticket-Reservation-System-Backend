@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/*
+ * File: Schedule.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the Schedule model, which provides various utility functions.
+ */
+
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 

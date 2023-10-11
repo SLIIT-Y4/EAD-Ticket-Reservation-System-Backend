@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson.Serialization;
+﻿/*
+ * File: CustomIdGenerator.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the custom id generation.
+ */
+
+
+using MongoDB.Bson.Serialization;
 
 namespace EAD_TravelManagement.Models
 {

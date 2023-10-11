@@ -1,4 +1,11 @@
-﻿using EAD_TravelManagement.Models;
+﻿/*
+ * File: TrainsController.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the TrainsController class, which provides various utility functions.
+ */
+
+using EAD_TravelManagement.Models;
 using EAD_TravelManagement.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

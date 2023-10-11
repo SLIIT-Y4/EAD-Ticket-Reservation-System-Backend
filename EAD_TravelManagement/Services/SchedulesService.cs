@@ -1,4 +1,12 @@
-﻿using EAD_TravelManagement.Models;
+﻿/*
+ * File: SchedulesService.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the Schedule Service, which provides various utility functions.
+ */
+
+
+using EAD_TravelManagement.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

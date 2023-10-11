@@ -1,4 +1,12 @@
-﻿using EAD_TravelManagement.Models;
+﻿/*
+ * File: UsersServices.cs
+ * Author: De Silva H.L.D.P.
+ * Date: October 10, 2023
+ * Description: This file contains the definition of the User Service, which provides various utility functions.
+ */
+
+
+using EAD_TravelManagement.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -24,16 +32,16 @@ namespace EAD_TravelManagement.Services
         public async Task<List<User>> GetAsync() => 
             await _usersCollection.Find(_ => true).ToListAsync();
 
-        public async Task<User?> GetAsync(string id) =>
-            await _usersCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        public async Task<User?> GetAsync(string nic) =>
+            await _usersCollection.Find(x => x.NIC == nic).FirstOrDefaultAsync();
 
         public async Task CreateAsync(User newUser) =>
             await _usersCollection.InsertOneAsync(newUser);
 
-        public async Task UpdateAsync(string id, User updatedUser) =>
-            await _usersCollection.ReplaceOneAsync(x => x.Id == id, updatedUser);
+        public async Task UpdateAsync(string nic, User updatedUser) =>
+            await _usersCollection.ReplaceOneAsync(x => x.NIC == nic, updatedUser);
 
-        public async Task RemoveAsync(string id) =>
-            await _usersCollection.DeleteOneAsync(x => x.Id == id);
+        public async Task RemoveAsync(string nic) =>
+            await _usersCollection.DeleteOneAsync(x => x.NIC == nic);
     }
 }
