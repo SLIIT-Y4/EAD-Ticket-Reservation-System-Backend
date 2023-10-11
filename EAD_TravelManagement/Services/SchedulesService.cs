@@ -8,6 +8,7 @@
 
 using EAD_TravelManagement.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace EAD_TravelManagement.Services
@@ -52,18 +53,20 @@ namespace EAD_TravelManagement.Services
         //find scheduled trains based on startPoint,stopStation,date
         public async Task<List<Schedule>> GetScheduledTrainsAsync(string startPoint, string stopStation, DateTime day)
         {
-            // query to get schedules with trains
-            var filter = Builders<Schedule>.Filter.Eq(x => x.StartPoint, startPoint) &
-                         Builders<Schedule>.Filter.ElemMatch(x => x.StopStations, s => s == stopStation) &
-                         Builders<Schedule>.Filter.Eq(x => x.Day, day) &
-                         Builders<Schedule>.Filter.Eq(x => x.ActiveStatus, true);
+            // Load all schedules from the database
+            var allSchedules = await _schedulesCollection.Find(Builders<Schedule>.Filter.Empty).ToListAsync();
 
-            // Use the filter to find matching schedules with trains
-            var matchingSchedules = await _schedulesCollection.Find(filter).ToListAsync();
+            // Filter schedules to find those that match the above
+            var matchingSchedules = allSchedules
+                .Where(schedule =>
+                    schedule.StartPoint == startPoint &&
+                    schedule.Day == day &&
+                    schedule.ActiveStatus &&
+                    schedule.StopStations.Contains(stopStation))
+                .ToList();
 
             return matchingSchedules;
         }
-
     }
 }
 

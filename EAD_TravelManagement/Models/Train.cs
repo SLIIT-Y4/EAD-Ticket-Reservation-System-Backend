@@ -33,7 +33,6 @@ namespace EAD_TravelManagement.Models
         [Required]
         public string RouteCategory { get; set; } = null!;
         public bool ActiveStatus { get; set; } = true;
-        public bool PublishStatus { get; set; } = true;
 
     }
 }
