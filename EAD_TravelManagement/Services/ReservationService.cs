@@ -58,5 +58,12 @@ namespace EAD_TravelManagement.Services
 
             return (int)count;
         }
+
+        // get the reservation that have schedules 
+        public async Task<List<Reservation>> GetReservationsByScheduleId(string scheduleId)
+        {
+            var filter = Builders<Reservation>.Filter.Eq(x => x.ScheduleId, scheduleId);
+            return await _reservationCollection.Find(filter).ToListAsync();
+        }
     }
 }
