@@ -56,7 +56,7 @@ namespace EAD_TravelManagement.Controllers
                 }
 
 
-                return Ok("Login successful");
+                return Ok(data);
             }
             else
             {

@@ -8,6 +8,7 @@
 
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
 
 namespace EAD_TravelManagement.Models
 {
@@ -17,9 +18,10 @@ namespace EAD_TravelManagement.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
+        [Required]
         public string NIC { get; set; }
 
-        public string? UserRole { get; set; }
+        [Required]
         public string Password { get; set; }
     }
 }
