@@ -139,5 +139,37 @@ namespace EAD_TravelManagement.Controllers
             }
         }
 
+        //find reservations history based on nic,date
+        [HttpGet("ReservationHistory")]
+        public async Task<IActionResult> GetReservationHistory(string userNIC, DateTime day)
+        {
+            var reservationHistory = await _reservationService.GetHistoryAsync(userNIC, day);
+
+            if (reservationHistory != null && reservationHistory.Any())
+            {
+                return Ok(reservationHistory);
+            }
+            else
+            {
+                return NotFound("No reservations found.");
+            }
+        }
+
+        //find upcoming reservations based on nic,date
+        [HttpGet("UpcomingReservation")]
+        public async Task<IActionResult> GetUpcomingReservations(string userNIC, DateTime day)
+        {
+            var upcomingReservation = await _reservationService.GetUpcomingResAsync(userNIC, day);
+
+            if (upcomingReservation != null && upcomingReservation.Any())
+            {
+                return Ok(upcomingReservation);
+            }
+            else
+            {
+                return NotFound("No reservations found.");
+            }
+        }
+
     }
 }
