@@ -31,8 +31,8 @@ namespace EAD_TravelManagement.Controllers
         public async Task<IActionResult> SignUp(Login login)
         {
 
-            await _loginsService.RegisterUserAsync(login);
-            return Ok("User registered successfully");
+            await _loginsService.RegisterUserAsync(login,login.Password);
+            return Ok(login);
         }
 
         //Login Function
@@ -52,7 +52,7 @@ namespace EAD_TravelManagement.Controllers
                 var authenticatedUser = await _loginsService.AuthenticateAsync(login.NIC, login.Password);
                 if (authenticatedUser == null)
                 {
-                    return Unauthorized("Invalid Creditials");
+                    return Unauthorized("Invalid Credentials");
                 }
 
 
