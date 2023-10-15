@@ -22,6 +22,7 @@ namespace EAD_TravelManagement.Models
         public string Name { get; set; } = null!;
 
         [Required]
+        [RegularExpression(@"^([0-9]{9}[x|X|v|V]|[0-9]{12})$", ErrorMessage = "Please enter a valid NIC.")]
         public string NIC { get; set; } = null!;
 
         [Required, EmailAddress]
@@ -31,6 +32,7 @@ namespace EAD_TravelManagement.Models
         public string UserRole { get; set; } = null!;
 
         [Required, DataType(DataType.Password)]
+        [RegularExpression(@"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", ErrorMessage = "Please enter a password with at least 8 characters with one uppercase letter, one digit and one special character.")]
         public string Password { get; set; } = null!;
 
         [Required, DataType(DataType.Password), Compare("Password", ErrorMessage = "The password and confirm password do not match.")]

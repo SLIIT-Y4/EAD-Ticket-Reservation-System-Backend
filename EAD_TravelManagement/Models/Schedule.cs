@@ -22,7 +22,7 @@ namespace EAD_TravelManagement.Models
         public string TrainId { get; set; } = null!;
 
         [Required]
-        public DateTime Day { get; set; }
+        public string Day { get; set; } = null!;
 
         [Required]
         public string StartPoint { get; set; } = null!;
