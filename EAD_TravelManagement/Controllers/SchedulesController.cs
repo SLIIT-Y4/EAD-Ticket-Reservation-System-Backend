@@ -94,9 +94,9 @@ namespace EAD_TravelManagement.Controllers
 
         //find scheduled trains based on startPoint,stopStation,date
         [HttpGet("ScheduledTrains")]
-        public async Task<IActionResult> GetScheduledTrains(string startPoint, string stopStation, DateTime day)
+        public async Task<IActionResult> GetScheduledTrains(string startPoint, string stopStation)
         {
-            var scheduledTrains = await _schedulesService.GetScheduledTrainsAsync(startPoint, stopStation, day);
+            var scheduledTrains = await _schedulesService.GetScheduledTrainsAsync(startPoint, stopStation);
 
             if (scheduledTrains != null && scheduledTrains.Any())
             {
