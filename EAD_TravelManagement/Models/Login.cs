@@ -9,6 +9,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace EAD_TravelManagement.Models
 {
@@ -19,9 +20,20 @@ namespace EAD_TravelManagement.Models
         public string? Id { get; set; }
 
         [Required]
+        [RegularExpression(@"^([0-9]{9}[x|X|v|V]|[0-9]{12})$", ErrorMessage = "Please enter a valid NIC.")]
         public string NIC { get; set; }
 
         [Required]
         public string Password { get; set; }
+
+        public void SetPassword(string password)
+        {
+            Password = BCrypt.Net.BCrypt.HashPassword(password);
+        }
+
+        public bool VerifyPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, Password);
+        }
     }
 }
