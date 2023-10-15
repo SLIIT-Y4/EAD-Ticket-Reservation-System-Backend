@@ -9,11 +9,14 @@ using EAD_TravelManagement.Models;
 using EAD_TravelManagement.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+
 
 namespace EAD_TravelManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class SchedulesController : ControllerBase
     {
         private readonly SchedulesService _schedulesService;
