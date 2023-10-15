@@ -9,11 +9,13 @@ using EAD_TravelManagement.Services;
 using EAD_TravelManagement.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace EAD_TravelManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class LoginsController : ControllerBase
     {
         private readonly LoginsService _loginsService;
@@ -31,7 +33,11 @@ namespace EAD_TravelManagement.Controllers
         public async Task<IActionResult> SignUp(Login login)
         {
 
+<<<<<<< HEAD
             await _loginsService.RegisterUserAsync(login,login.Password);
+=======
+            await _loginsService.RegisterUserAsync(login);
+>>>>>>> bbedc9f7b4c4cd5b3879deb6e73c0b56e96a909d
             return Ok(login);
         }
 

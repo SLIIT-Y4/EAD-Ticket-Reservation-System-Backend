@@ -16,7 +16,7 @@ namespace EAD_TravelManagement.Services
         private readonly IMongoCollection<Reservation> _reservationCollection;
 
         public ReservationService(
-            IOptions<TicketReservationDatabaseSettings> ticketReservationDatabaseSettings) 
+            IOptions<TicketReservationDatabaseSettings> ticketReservationDatabaseSettings)
         {
             var mongoClient = new MongoClient(
                 ticketReservationDatabaseSettings.Value.ConnectionString);
@@ -64,6 +64,43 @@ namespace EAD_TravelManagement.Services
         {
             var filter = Builders<Reservation>.Filter.Eq(x => x.ScheduleId, scheduleId);
             return await _reservationCollection.Find(filter).ToListAsync();
+        }
+
+        //find reservation history based on user,date
+        public async Task<List<Reservation>> GetHistoryAsync(string userNIC, DateTime day)
+        {
+            // Load all reservations from the database
+            var allReservations = await _reservationCollection.Find(Builders<Reservation>.Filter.Empty).ToListAsync();
+
+            // Filter reservations to find those that match the above
+            var matchingReservation = allReservations
+                .Where(reservation =>
+                    reservation.ReservationDate < day &&
+                    reservation.UserNIC == userNIC
+                 )
+                .ToList();
+
+            return matchingReservation;
+
+        }
+
+        //find upcoming reservations based on user,date
+        public async Task<List<Reservation>> GetUpcomingResAsync(string userNIC, DateTime day)
+        {
+            // Load all reservations from the database
+            var allReservations = await _reservationCollection.Find(Builders<Reservation>.Filter.Empty).ToListAsync();
+
+            // Filter reservations to find those that match the above
+            var matchingReservation = allReservations
+                .Where(reservation =>
+                    reservation.ReservationDate > day &&
+                    reservation.UserNIC == userNIC &&
+                    reservation.ReservationStatus == true
+                 )
+                .ToList();
+
+            return matchingReservation;
+
         }
     }
 }

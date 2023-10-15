@@ -9,11 +9,14 @@ using EAD_TravelManagement.Models;
 using EAD_TravelManagement.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+
 
 namespace EAD_TravelManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class SchedulesController : ControllerBase
     {
         private readonly SchedulesService _schedulesService;
@@ -91,9 +94,9 @@ namespace EAD_TravelManagement.Controllers
 
         //find scheduled trains based on startPoint,stopStation,date
         [HttpGet("ScheduledTrains")]
-        public async Task<IActionResult> GetScheduledTrains(string startPoint, string stopStation, DateTime day)
+        public async Task<IActionResult> GetScheduledTrains(string startPoint, string stopStation)
         {
-            var scheduledTrains = await _schedulesService.GetScheduledTrainsAsync(startPoint, stopStation, day);
+            var scheduledTrains = await _schedulesService.GetScheduledTrainsAsync(startPoint, stopStation);
 
             if (scheduledTrains != null && scheduledTrains.Any())
             {
