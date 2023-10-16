@@ -9,7 +9,7 @@ using EAD_TravelManagement.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
-
+using System.Globalization;
 
 namespace EAD_TravelManagement.Controllers
 {
@@ -160,9 +160,18 @@ namespace EAD_TravelManagement.Controllers
 
         //find upcoming reservations based on nic,date
         [HttpGet("UpcomingReservation")]
-        public async Task<IActionResult> GetUpcomingReservations(string userNIC, DateTime day)
+        public async Task<IActionResult> GetUpcomingReservations(string userNIC, string day)
         {
-            var upcomingReservation = await _reservationService.GetUpcomingResAsync(userNIC, day);
+            if (DateTime.TryParseExact(day, "yyyy-MM-ddTHH:mm:ss.fffZ", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out DateTime parsedDate))
+            {
+                // Now, 'parsedDate' contains the correctly formatted date
+                // You can use 'parsedDate' in your logic or save it to the database
+            }
+            else
+            {
+                return BadRequest("Invalid date format. Please use 'yyyy-MM-ddTHH:mm:ss.fffZ'");
+            }
+            var upcomingReservation = await _reservationService.GetUpcomingResAsync(userNIC, parsedDate);
 
             if (upcomingReservation != null && upcomingReservation.Any())
             {
