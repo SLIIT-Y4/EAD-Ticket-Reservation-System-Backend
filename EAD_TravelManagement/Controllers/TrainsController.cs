@@ -66,7 +66,7 @@ namespace EAD_TravelManagement.Controllers
 
             await _trainsService.UpdateAsync(id, updatedTrain);
 
-            return NoContent();
+            return Ok(updatedTrain);
         }
 
         //Delete a particular train
@@ -82,7 +82,7 @@ namespace EAD_TravelManagement.Controllers
 
             await _trainsService.RemoveAsync(id);
 
-            return NoContent();
+            return Ok("Successfully Deleted");
         }
     }
 }

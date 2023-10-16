@@ -88,7 +88,7 @@ namespace EAD_TravelManagement.Controllers
                 updatedReservation.BookingId = reservation.BookingId;
                 await _reservationService.UpdateAsync(id, updatedReservation);
 
-                return NoContent();
+                return Ok(updatedReservation);
             }
             else
             {
@@ -110,7 +110,7 @@ namespace EAD_TravelManagement.Controllers
 
             await _reservationService.RemoveAsync(id);
 
-            return NoContent();
+            return Ok("Successfully Deleted");
         }
 
         //cancel a reservation
@@ -134,7 +134,7 @@ namespace EAD_TravelManagement.Controllers
 
                 await _reservationService.UpdateAsync(id, reservation);
 
-                return NoContent();
+                return Ok(reservation);
             }
             else
             {

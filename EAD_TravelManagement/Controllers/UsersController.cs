@@ -67,7 +67,7 @@ namespace EAD_TravelManagement.Controllers
 
             await _usersService.UpdateAsync(nic, updatedUser);
 
-            return NoContent();
+            return Ok(updatedUser);
         }
 
         //Delete a specific user
@@ -83,7 +83,7 @@ namespace EAD_TravelManagement.Controllers
 
             await _usersService.RemoveAsync(nic);
 
-            return NoContent();
+            return Ok("Successfully Deleted");
         }
     }
 }

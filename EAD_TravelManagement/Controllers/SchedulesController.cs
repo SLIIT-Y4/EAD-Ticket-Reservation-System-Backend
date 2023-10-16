@@ -73,7 +73,7 @@ namespace EAD_TravelManagement.Controllers
 
             await _schedulesService.UpdateAsync(id, updatedSchedule);
 
-            return NoContent();
+            return Ok(updatedSchedule);
         }
 
         //Delete a specific schedule
@@ -89,7 +89,7 @@ namespace EAD_TravelManagement.Controllers
 
             await _schedulesService.RemoveAsync(id);
 
-            return NoContent();
+            return Ok("Deleted Successfully");
         }
 
         //find scheduled trains based on startPoint,stopStation,date
