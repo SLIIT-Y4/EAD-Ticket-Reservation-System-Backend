@@ -32,7 +32,7 @@ namespace EAD_TravelManagement.Controllers
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp(Login login)
         {
-            await _loginsService.RegisterUserAsync(login,login.Password);
+            await _loginsService.RegisterUserAsync(login);
 
             return Ok(login);
         }
