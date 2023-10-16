@@ -26,14 +26,5 @@ namespace EAD_TravelManagement.Models
         [Required]
         public string Password { get; set; }
 
-        public void SetPassword(string password)
-        {
-            Password = BCrypt.Net.BCrypt.HashPassword(password);
-        }
-
-        public bool VerifyPassword(string password)
-        {
-            return BCrypt.Net.BCrypt.Verify(password, Password);
-        }
     }
 }
