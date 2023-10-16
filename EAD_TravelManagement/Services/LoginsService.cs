@@ -30,9 +30,8 @@ namespace EAD_TravelManagement.Services
         }
 
         //Register a user
-        public async Task RegisterUserAsync(Login login, string password)
+        public async Task RegisterUserAsync(Login login)
         {
-            login.SetPassword(password);
             await _loginsCollection.InsertOneAsync(login);
         }
 
@@ -41,12 +40,9 @@ namespace EAD_TravelManagement.Services
         {
             var login = await _loginsCollection.Find(l => l.NIC == nic && l.Password == password).FirstOrDefaultAsync();
 
-            if (login != null && login.VerifyPassword(password))
-            {
-                return login;
-            }
-
-            return null;
+      
+            return login;
+          
         }
     }
 }
